@@ -35,7 +35,7 @@ public class AltaEmpleado extends HttpServlet {
 		if(ConstructoraController.validaNuevoEmpleado(nuevoEmpleado))
 			getServletConfig().getServletContext().getRequestDispatcher("/error_usuario_existente.jsp").forward(request, response);
 		else
-			getServletConfig().getServletContext().getRequestDispatcher("/usuario_registro.html").forward(request, response);
+			getServletConfig().getServletContext().getRequestDispatcher("/usuario_registro.jsp").forward(request, response);
 	}
 
 }

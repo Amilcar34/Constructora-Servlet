@@ -13,6 +13,8 @@ import com.constructora.enteties.Empleado;
 
 public final class ConstructoraController {
 
+	public static ArrayList<Empleado> listaEmpleadosPorArea;
+
 	public static int validaIngresoUsuario(String user, String pass) {
 
 		int ok = 0;
@@ -127,13 +129,37 @@ public final class ConstructoraController {
 				
 
 				while (rs.next()) {
-					listaEmpleadoPorArea.add(new Empleado(rs.getString("nombre"), rs.getString("apellido"), rs.getString("area")));
+					listaEmpleadoPorArea.add(new Empleado(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("user"), rs.getString("pass"), rs.getString("area")));
 				}
+				listaEmpleadosPorArea = listaEmpleadoPorArea;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return listaEmpleadoPorArea;
+	}
+
+	public static boolean eliminarEmpleado(Long id) {
+		boolean delete = false;
+		try {
+			Connection con = new IConnection() {
+			}.getConnection();
+
+			if (con != null) {
+				PreparedStatement ps = null;
+				String sql = "DELETE FROM users WHERE id=?";
+				ps = con.prepareStatement(sql);
+				ps.setLong(1, id);
+				ps.execute();
+				ps.close();
+				delete = true;
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return delete;
 	}
 
 }

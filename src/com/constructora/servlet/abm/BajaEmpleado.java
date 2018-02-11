@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.constructora.controller.ConstructoraController;
+
 /**
  * Servlet implementation class BajaEmpleado
  */
@@ -24,19 +26,19 @@ public class BajaEmpleado extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String user = request.getParameter("user");
+		String user = request.getParameter("usuario");
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		boolean usuarioEliminado = ConstructoraController.eliminarEmpleado(Long.parseLong(request.getParameter("id")));
 	}
 
 }

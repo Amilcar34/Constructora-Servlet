@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<h2 class="h3 mb-3 font-weight-normal">Cargar un nuevo empleado</h2>
+	<table>
+		<form action="AltaEmpleado" method="POST">
+			<tr>
+				<input type="text" id="usuario" name="user" class="form-control"
+					placeholder="Usuario" required>
+			</tr>
+			<tr>
+				<input type="password" id="password" name="pass"
+					class="form-control" placeholder="Contraseña" required>
+			</tr>
+			<tr>
+				<select id="area" name="area" class="form-control">
+					<option value="RRHH">RRHH</option>
+					<option value="Constructor">Constructor</option>
+					<option value="Electricista">Electricista</option>
+					<option value="Seguridad">Seguridad</option>
+				</select>
+			</tr>
+			<tr>
+				<input type="text" id="nombre" name="nombre" class="form-control"
+					placeholder="Nombre" required>
+			</tr>
+			<tr>
+				<input type="text" id="apellido" name="apellido"
+					class="form-control" placeholder="Apellido" required>
+			</tr>
+			<br>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Registrar
+				empleado</button>
+		</form>
+	</table>
+</body>
+</html>

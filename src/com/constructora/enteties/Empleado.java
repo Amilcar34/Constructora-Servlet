@@ -2,6 +2,7 @@ package com.constructora.enteties;
 
 public class Empleado {
 	
+	private Long id;
 	private String nombre;
 	private String apellido;
 	private String usuario;
@@ -9,16 +10,30 @@ public class Empleado {
 	private String horaFechaDeIngreso;
 	private String horaFechaDeEgreso;
 	private String area;
-
+	
+	
+	
 	public Empleado(String nombre, String apellido, String area) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.area = area;
 	}
-	
+
 	public Empleado(String nombre, String apellido, String usuario, String clave, String area) {
 		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.usuario = usuario;
+		this.clave = clave;
+		this.area = area;
+	}
+
+
+
+	public Empleado(long id, String nombre, String apellido, String usuario, String clave, String area) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.usuario = usuario;
@@ -69,6 +84,14 @@ public class Empleado {
 	}
 	public void setArea(String area) {
 		this.area = area;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

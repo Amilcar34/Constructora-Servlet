@@ -16,9 +16,7 @@ public interface IConnection {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost/constructora", user, password);
 
-			if (con != null)
-				System.out.println("Funca la conexion");
-			else
+			if (con == null)
 				System.out.println("No funciono la conexion");
 
 		} catch (Exception error) {
