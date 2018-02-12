@@ -9,16 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.constructora.controller.ConstructoraController;
 
-/**
- * Servlet implementation class BajaEmpleado
- */
 @WebServlet(description = "Elimina de forma directa los empleados", urlPatterns = { "/BajaEmpleado" })
 public class BajaEmpleado extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public BajaEmpleado() {
         super();
     }
