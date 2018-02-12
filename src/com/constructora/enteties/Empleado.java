@@ -20,6 +20,16 @@ public class Empleado {
 		this.area = area;
 	}
 
+	public Empleado(Long id, String nombre, String apellido, String usuario, String clave, String area) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.usuario = usuario;
+		this.clave = clave;
+		this.area = area;
+	}
+
 	public Empleado(String nombre, String apellido, String usuario, String clave, String area) {
 		super();
 		this.nombre = nombre;
@@ -93,5 +103,11 @@ public class Empleado {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Empleado [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", usuario=" + usuario
+				+ ", clave=" + clave + ", horaFechaDeIngreso=" + horaFechaDeIngreso + ", horaFechaDeEgreso="
+				+ horaFechaDeEgreso + ", area=" + area + "]";
+	}
 }

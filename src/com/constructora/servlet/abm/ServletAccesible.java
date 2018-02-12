@@ -16,16 +16,16 @@ public class ServletAccesible extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		if (request.getParameter("modifica")!=null) {
-			new ModificacionEmpleado().doPost(request, response);
+			new ModificacionEmpleado().doPut(request, response);
 		}
 		else if (request.getParameter("elimina")!=null) {
 			new BajaEmpleado().doDelete(request, response);
 		}
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 }

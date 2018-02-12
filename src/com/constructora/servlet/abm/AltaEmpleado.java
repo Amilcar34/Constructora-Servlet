@@ -29,12 +29,13 @@ public class AltaEmpleado extends HttpServlet {
 		String user = request.getParameter("user");
 		String pass = request.getParameter("pass");
 		String area = request.getParameter("area");
+		request.setAttribute("unaModificasion", false);
 
 		Empleado nuevoEmpleado = new Empleado(name, apellido, user, pass, area);	
 		
-		if(ConstructoraController.validaNuevoEmpleado(nuevoEmpleado))
+		if(ConstructoraController.validaUsuarioExistenteParaAlta(nuevoEmpleado)) 
 			getServletConfig().getServletContext().getRequestDispatcher("/error_usuario_existente.jsp").forward(request, response);
-		else
+		else 
 			getServletConfig().getServletContext().getRequestDispatcher("/usuario_registro.jsp").forward(request, response);
 	}
 

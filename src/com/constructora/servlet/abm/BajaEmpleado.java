@@ -38,7 +38,8 @@ public class BajaEmpleado extends HttpServlet {
 	}
 
 	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boolean usuarioEliminado = ConstructoraController.eliminarEmpleado(Long.parseLong(request.getParameter("id")));
+		
+		ConstructoraController.eliminarEmpleado(Long.parseLong(request.getParameter("id")));
 	}
 
 }

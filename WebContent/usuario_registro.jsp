@@ -6,6 +6,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	ArrayList<Empleado> listaEmpleadosPorArea = (ArrayList<Empleado>) request.getAttribute("listaEmpleadosPorArea");
+	
+	boolean exitosaModificacionEmpleado=false;
+	if((boolean) request.getAttribute("unaModificasion")){
+		exitosaModificacionEmpleado = (boolean) request.getAttribute("exitosaModificacionEmpleado");
+	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -37,7 +42,7 @@
 					<input class="btn btn-lg btn-primary btn-block" type="submit" value="Buscar empleados por área"/>
 				</form>
 				<br>
-					<form action="ServletAccesible" method="POST">
+					<form action="ServletAccesible" method="get">
 										
 						<div class="form-label-group">
 							<%
@@ -60,7 +65,12 @@
 					out.print("</form>");
 						%>
 			</div>
-			
+		<%
+			if((boolean) request.getAttribute("unaModificasion")){
+				if(exitosaModificacionEmpleado)
+					out.print("<h4>El empleado se modifico exitosamente</h4>");
+			}
+		%>
 		</div>
 	<p class="mt-5 mb-3 text-muted text-center">&copy; Construtora 2018</p>
 	</div>

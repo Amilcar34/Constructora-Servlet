@@ -15,13 +15,12 @@ public final class ConstructoraController {
 
 	public static ArrayList<Empleado> listaEmpleadosPorArea;
 
-	public static int validaIngresoUsuario(String user, String pass) {
+	public static Empleado validaIngresoUsuario(String user, String pass) {
 
-		int ok = 0;
 		Connection con = null;
 		con = new IConnection() {
 		}.getConnection();
-
+		Empleado edo = null;
 		try {
 			String arg0 = "SELECT * FROM users WHERE user=? AND pass=?";
 			PreparedStatement ps = con.prepareStatement(arg0);
@@ -31,21 +30,13 @@ public final class ConstructoraController {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.absolute(1)) {
-				Empleado edo = new Empleado(rs.getString("nombre"), rs.getString("apellido"), rs.getString("area"));
-
-				if (edo.getArea().equals("RRHH"))
-					ok = 5;
-				else
-					ok = 1;
-
+				edo = new Empleado(rs.getString("nombre"), rs.getString("apellido"), rs.getString("area"));
 				cargaIngresoEmpleado(edo);
-			} else
-				ok = 0;
-
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("El error esta en el try de ConstructoraController.validaIngresoUsuario");
 		}
-		return ok;
+		return edo;
 	}
 
 	private static void cargaIngresoEmpleado(Empleado empleado) {
@@ -63,11 +54,11 @@ public final class ConstructoraController {
 			ps.close();
 
 		} catch (Exception e0) {
-			e0.printStackTrace();
+			System.out.println("El error esta en el try de ConstructoraController.cargaIngresoEmpleado");;
 		}
 	}
 
-	public static boolean validaNuevoEmpleado(Empleado nuevoEmpleado) {
+	public static boolean validaUsuarioExistenteParaAlta(Empleado nuevoEmpleado) {
 
 		boolean ok = false;
 		Connection con = null;
@@ -87,7 +78,7 @@ public final class ConstructoraController {
 				cargaDeNuevoEmpleado(nuevoEmpleado);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error en el try de ConstructoraController.validaUsuarioExistente");
 		}
 		return ok;
 	}
@@ -109,8 +100,7 @@ public final class ConstructoraController {
 			ps.close();
 
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			System.out.println("Error en el try de ConstructoraController.cargaDeNuevoEmpleado");		}
 	}
 
 	public static ArrayList<Empleado> retornaListaEmpleadosPorArea(String parameter) {
@@ -134,7 +124,7 @@ public final class ConstructoraController {
 				listaEmpleadosPorArea = listaEmpleadoPorArea;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error en el try de ConstructoraController.retornaListaEmpleadosPorArea");
 		}
 		return listaEmpleadoPorArea;
 	}
@@ -156,10 +146,67 @@ public final class ConstructoraController {
 				
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error en el try de ConstructoraController.eliminarEmpleado");
 		}
 		
 		return delete;
+	}
+
+	public static boolean validaUsuarioExistenteParaModificar(Empleado usuarioEmpleado) {
+		boolean ok = false;
+		Connection con = null;
+		con = new IConnection() {
+		}.getConnection();
+
+		try {
+			String arg0 = "SELECT * FROM users WHERE user=? AND id!=?";
+			PreparedStatement ps = con.prepareStatement(arg0);
+			ps.setString(1, usuarioEmpleado.getUsuario());
+			ps.setLong(2, usuarioEmpleado.getId());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.absolute(1))
+				ok = true;
+			else
+				modificarEmpleado(usuarioEmpleado);
+
+		} catch (Exception e) {
+			System.out.println("Error en el try de ConstructoraController.validaUsuarioExistenteParaModificar");
+		}
+		return ok;
+	}
+	
+	public static boolean modificarEmpleado(Empleado modificaEmpleado) {
+		boolean cambioRealizado = false;
+		
+		try {
+			IConnection ic = new IConnection(){};
+			Connection con = ic.getConnection();
+			
+			if(con != null){
+				PreparedStatement ps = null;
+				String sql = "UPDATE users SET user=?, pass=?, area=?, nombre=?, apellido=? WHERE id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, modificaEmpleado.getUsuario());
+				ps.setString(2, modificaEmpleado.getClave());
+				ps.setString(3, modificaEmpleado.getArea());
+				ps.setString(4, modificaEmpleado.getNombre());
+				ps.setString(5, modificaEmpleado.getApellido());
+				ps.setLong(6, modificaEmpleado.getId());
+				ps.execute();
+				ps.close();
+				cambioRealizado = true;
+			}else{
+				System.err.println("No se realizo la coneccion a la DB");
+				cambioRealizado = false;
+			}
+				
+		} catch (Exception e) {
+			System.err.println("Unable to connect");
+			e.printStackTrace();
+		}
+		
+		return cambioRealizado;
 	}
 
 }

@@ -14,6 +14,6 @@
 		<h1 style="color:Tomato;">Existe este usuario para otro empleado, elija otro usuario</h1>
 		<hr>
 		<jsp:include page="usuario_registro.jsp"></jsp:include>
-	</dir>
+	</div>
 </body>
 </html>
