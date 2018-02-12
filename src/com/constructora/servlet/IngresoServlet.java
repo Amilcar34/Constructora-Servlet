@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.constructora.controller.ConstructoraController;
 
-
 @WebServlet(description = "Toma los datos del index", urlPatterns = { "/IngresoServlet" })
 public final class IngresoServlet extends HttpServlet {
 
